@@ -1,0 +1,55 @@
+<div class="container">
+  <form (ngSubmit)="saveBook()" #bookForm="ngForm">
+    <div class="col-md-12 form-group">
+      <div class="col-md-2">
+        <label>Employee ID</label>
+      </div>
+      <div class="col-md-10">
+          <mat-form-field class="example-full-width">
+              <input  matInput placeholder="Employee Id" [(ngModel)]="onestatus.empid" name="empid">{{empid}}
+            </mat-form-field>
+      </div>
+    </div>
+    <div class="col-md-12 form-group">
+      <div class="col-md-2">
+        <label>Date</label>
+      </div>
+      <div class="col-md-10">
+        <mat-form-field>
+          <input  matInput [matDatepicker]="picker" placeholder="Choose a Date" name="date" [(ngModel)]="onestatus.date">
+          <!-- (ngModelChange)="getStatus()" -->
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-md-12 form-group">
+      <div class="col-md-2">
+        <label>Project Name</label>
+      </div>
+      <div class="col-md-10">
+        <mat-form-field class="example-full-width">
+          <input  matInput placeholder="Project Name" [(ngModel)]="onestatus.project_name" name="project_name">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-md-12 form-group">
+      <div class="col-md-2">
+        <label>Status</label>
+      </div>
+      <div class="col-md-10">
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <textarea matInput name='status' [(ngModel)]="onestatus.today_status" [disabled]=textarea name="today_status"></textarea>
+            <mat-icon matSuffix *ngIf="textarea==false">mode_edit</mat-icon>
+          </mat-form-field>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-12 form-group">
+      <div class="col-md-2 button-row">
+        <button type="submit" mat-raised-button color="primary">Save</button>
+      </div>
+    </div>
+  </form>
+</div>  

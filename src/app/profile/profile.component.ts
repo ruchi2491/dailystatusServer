@@ -1,0 +1,33 @@
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { DataService } from "../data.service";
+import { Profile } from 'selenium-webdriver/firefox';
+
+@Component({
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
+})
+export class ProfileComponent implements OnInit {
+
+  empid;
+  profile: {};
+
+  constructor(private route: ActivatedRoute, private http: HttpClient, private data: DataService) {
+
+  }
+
+  ngOnInit() {
+    this.data.currentEmployeeid.subscribe(empid => this.empid = empid);
+    // console.log("In profile component"+this.empid);
+    this.http.get('/employee/' + this.empid).subscribe(data => {
+      this.profile = data[0];
+      //     console.log(this.profile);
+    });
+  }
+
+
+
+}
+

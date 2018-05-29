@@ -1,0 +1,93 @@
+<div class="container">
+  <mat-tab-group>
+    <mat-tab label="status of current month">
+      <div class="col-md-12">
+        <div class="col-md-4">
+          <label>Select Employee ID</label>
+        </div>
+        <div class="col-md-4">
+          <select class="form-control" [(ngModel)]="selectedOption" name="first" >
+            <!-- <optgroup label="Senior">
+                <option>500</option>
+                <option>502</option>
+                <option>504</option>
+              </optgroup>
+              <optgroup label="Juniors">
+                <option>471</option>
+                <option>472</option>
+                <option>493</option>
+              </optgroup> -->
+              <option *ngFor="let employee of employees" [(ngValue)]="employee.empid">{{employee.empid}}</option>
+          </select>
+        </div>
+      </div>
+      <button (click)="getStatusWithId()" class="btn btn-primary">Show Status</button>
+      <div class="col-md-12" *ngIf="showTable2">
+        <table id="employees">
+          <tr>
+            <th>Employee ID</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+          <tr *ngFor="let dailystatus of allstatus">
+            <td>{{dailystatus.empid}}</td>
+            <td>{{dailystatus.date}}</td>
+            <td>{{dailystatus.today_status}}</td>
+          </tr>
+        </table>
+
+
+      </div>
+    </mat-tab>
+    <mat-tab label="status of previous month">
+      <div class="col-md-12">
+        <div class="col-md-4">
+          <label>Select Employee ID</label>
+        </div>
+        <div class="col-md-4">
+          <select class="form-control" [(ngModel)]="selectedOption" name="first">
+              <option *ngFor="let employee of employees">{{employee.empid}}</option>
+            </select>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="col-md-4">
+          <label>Select Month and Year</label>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="selectedDate" name="Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <button (click)="getStatusWithDateAndId()" class="btn btn-primary">Show Status</button>
+      <div class="col-md-12" *ngIf="showTable1">
+        <table id="employees">
+          <tr>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+          <tr *ngFor="let dailystatus of allstatus">
+            <td>{{dailystatus.date}}</td>
+            <td>{{dailystatus.today_status}}</td>
+          </tr>
+          <!-- <tr>
+              <td>02/03/2018</td>
+              <td>Christina Berglund</td>
+            </tr>
+            <tr>
+              <td>03/03/2018</td>
+              <td>Francisco Chang</td>
+            </tr>
+   -->
+        </table>
+
+
+      </div>
+
+    </mat-tab>
+  </mat-tab-group>
+</div>
