@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { EmployeeComponent } from '../employee.component';
+// import { Dailystatus } from '../../../../models/Dailystatus';
+
 @Component({
   selector: 'app-enter-status',
   templateUrl: './enter-status.component.html',
@@ -8,14 +11,18 @@ import { Router } from '@angular/router';
 })
 export class EnterStatusComponent implements OnInit {
 
-   @Input() employeeid;
+   employeeid=this.employeeComponent.empid;
 
+  // onestatus= new Dailystatus();
   onestatus={};
-  constructor(private http: HttpClient, private router: Router) {
-
+  constructor(private http: HttpClient, private router: Router,private employeeComponent: EmployeeComponent) {
+    // this.onestatus.empid=this.employeeComponent.empid;
   }
   ngOnInit() {
-    console.log("Employee id of user is"+this.employeeid);
+    console.log("Employee id of user is in enter-status component"+ this.employeeid);
+    this.onestatus = {
+      "empid":this.employeeid
+    };
   }
 
   saveBook() {

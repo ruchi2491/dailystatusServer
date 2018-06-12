@@ -40,11 +40,22 @@ router.post('/', function(req, res, next) {
 
 /* UPDATE Employee */
 router.put('/:id', function(req, res, next) {
-  Employee.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+   console.log(req.params.id);
+   console.log(req.body);
+  Employee.findOneAndUpdate({empid:req.params.id},{$set:req.body}, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
+
+// router.put('/:id', function(req, res, next) {
+//   console.log(req.params.id);
+//   console.log(req.body);
+//   Employee.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+//     if (err) return next(err);
+//     res.json(post);
+//   });
+// });
 
 /* DELETE Employee */
 router.delete('/:id', function(req, res, next) {

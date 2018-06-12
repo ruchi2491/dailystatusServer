@@ -1,102 +1,90 @@
-<!-- <div class="container-fluid">
-    <div class="col-md-12">
-        <div class="col-md-4">
-            <label>Employee ID</label>
-        </div>
-        <div class="col-md-8">
-            <input type="text" [(ngModel)]="empId">
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="col-md-4">
-            <label>Email ID</label>
-        </div>
-        <div class="col-md-8">
-            <input type="email" [(ngModel)]="emailId">
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="col-md-4">
-            <label>Employee Name</label>
-        </div>
-        <div class="col-md-8">
-            <input type="text" [(ngModel)]="empName">
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="col-md-4">
-            <label>Password</label>
-        </div>
-        <div class="col-md-8">
-            <input type="password" [(ngModel)]="password">
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="col-md-4">
-            <label>Role</label>
-        </div>
-        <div class="col-md-8">
-            <input type="text" [(ngModel)]="role">
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="col-md-4">
-            <button class="btn btn-primary" (click)=onSubmit()>Submit</button>
-        </div>
-        <div class="col-md-8">
-            <input type="submit" value="Reset" (click)=onReset()>
-        </div>
-    </div>
-</div>
-<p>{{message}}</p> -->
 <div class="container">
+    <!-- <div class="col-md-12">
+<input type="text"  [disabled]="isDisabled"
+value="ATMECS Technologies PVT.LTD" [(ngModel)]="employee.company" name="company">
+</div>
+<div class="col-md-12">
 
-    <form class="example-form">
+</div>
+<div class="col-md-12">
+
+</div>
+<div class="col-md-12">
+
+</div> -->
+    <form (ngSubmit)="saveBook()" #bookForm="ngForm">
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Company Name" disabled [(ngModel)]="cname">
+            <input matInput placeholder="Company Name" disabled  name="company" [(ngModel)]="company" />
         </mat-form-field>
 
         <table class="example-full-width" cellspacing="0">
             <tr>
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="First name">
-                </mat-form-field>
+                <select class="form-control" [(ngModel)]="employee.Title" name="employee.Title">
+                    <option>Mr.</option>
+                    <option>Ms.</option>
+                </select>
             </tr>
             <tr>
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Last Name">
+                    <input matInput placeholder="Employee Id" [(ngModel)]="employee.empid" name="employee.empid">
+                </mat-form-field>
+            </tr>
+
+            <tr>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="name" [(ngModel)]="employee.name" name="employee.name">
                 </mat-form-field>
             </tr>
         </table>
 
         <p>
             <mat-form-field class="example-full-width">
-                <textarea matInput placeholder="Address"></textarea>
+                <textarea matInput placeholder="Address" [(ngModel)]="employee.address" name="employee.address"></textarea>
             </mat-form-field>
         </p>
 
         <table class="example-full-width" cellspacing="0">
             <tr>
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="City">
+                <select class="form-control" [(ngModel)]="employee.gender" name="employee.gender">
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+            </tr>
+            <tr>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker1" placeholder="Choose a date" [(ngModel)]="employee.dob" name="employee.dob">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
             </tr>
             <tr>
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="State">
+                    <input matInput placeholder="Designantion" [(ngModel)]="employee.Designation" name="Designation" >
                 </mat-form-field>
 
             </tr>
             <tr>
                 <mat-form-field class="example-full-width">
-                    <input matInput #postalCode maxlength="5" placeholder="Postal Code">
-                    <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+                    <input matInput placeholder="reporting_to" [(ngModel)]="employee.reporting_to" name="reporting_to" >
+                </mat-form-field>
+            </tr>
+            <tr>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker" placeholder="Choose a Joining date" [(ngModel)]="employee.doj" name="employee.doj">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </tr>
+            <tr>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Role" name="role" [(ngModel)]="employee.Role" >
                 </mat-form-field>
             </tr>
 
         </table>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
+            <input matInput placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher" [(ngModel)]="employee.emailid"
+                [name]="employee.email">
             <mat-hint>Errors appear instantly!</mat-hint>
             <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                 Please enter a valid email address
@@ -107,12 +95,11 @@
             </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <span matPrefix>+1 &nbsp;</span>
-            <input type="tel" matInput placeholder="Telephone">
-            <mat-icon matSuffix>mode_edit</mat-icon>
+            <input type="tel" matInput placeholder="Telephone" [(ngModel)]="employee.mobileno" name="employee.mobileno">
+
         </mat-form-field>
         <div class="button-row">
-            <button mat-raised-button color="primary" (click)=onSubmit()>Submit</button>
+            <button type="submit" mat-raised-button color="primary">Save</button>
             <button mat-raised-button color="primary" (click)=onReset()>Reset</button>
         </div>
     </form>
