@@ -11,7 +11,7 @@ import { Profile } from 'selenium-webdriver/firefox';
 })
 export class ProfileComponent implements OnInit {
 
-  empid;
+  employeeid;
   profile: {};
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private data: DataService) {
@@ -19,9 +19,12 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.data.currentEmployeeid.subscribe(empid => this.empid = empid);
+    this.profile = {
+      "empid":this.employeeid
+    };
+    this.data.currentEmployeeid.subscribe(employeeid => this.employeeid = employeeid);
     // console.log("In profile component"+this.empid);
-    this.http.get('/employee/' + this.empid).subscribe(data => {
+    this.http.get('/employee/' + this.employeeid).subscribe(data => {
       this.profile = data[0];
       //     console.log(this.profile);
     });

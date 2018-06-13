@@ -12,6 +12,7 @@ var EmployeeSchema = new mongoose.Schema({
     designation : String,
     doj:String,
     reporting_to:String,
-    level:String
+    level:String,
+    token:String
   });
   module.exports = mongoose.model('Employee', EmployeeSchema);
