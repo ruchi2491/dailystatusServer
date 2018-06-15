@@ -23,14 +23,19 @@ export class LoginComponent {
     }
 
     ngOnInit() {
-        this.http.get('/employee').subscribe(data => {
+        console.log("---------1");
+        this.http.get('/api/employee').subscribe(data => {
+            console.log(data);
             this.employees = data;
+            console.log(this.employees);
         });
         this.data.currentEmployeeid.subscribe(empid => this.message = empid)
     }
 
 
     login() {
+        console.log("Inside login");
+        console.log(this.employees);
         this.employees.forEach(element => {
             if (this.username === element.emailid && this.password === '12345') {
                 this.empid = element.empid;
@@ -59,7 +64,7 @@ export class LoginComponent {
     }
 
     doPut() {
-        this.http.put('/employee/' + this.empid, { "token": this.token }).subscribe(data => {
+        this.http.put('/api/employee' + this.empid, { "token": this.token }).subscribe(data => {
             this.employees.token = data;
         });
         // this.data.currentEmployeeid.subscribe(empid => this.message = empid)   
